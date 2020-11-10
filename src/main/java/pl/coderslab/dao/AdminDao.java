@@ -1,7 +1,7 @@
 package pl.coderslab.dao;
+import org.mindrot.jbcrypt.BCrypt;
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Admin;
-import pl.coderslab.model.Book;
 import pl.coderslab.utils.DbUtil;
 
 import java.sql.Connection;
@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class AdminDao  {
     private static final String createAdminQuery = "INSERT INTO admins(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
     private static final String deleteAdminQuery = "DELETE FROM admins WHERE id = ?";
@@ -18,6 +20,9 @@ public class AdminDao  {
     private static final String updateAdminQuery = "UPDATE admins SET first_name=?, last_name=?, email=?, password = ? WHERE id=?";
     private static final String changeSuperadminQuery = "UPDATE admins SET superadmin=? WHERE id=?";
     private static final String findAdminQuery = "SELECT * FROM admins WHERE id=?";
+    public static String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
 
     public Admin read(Integer adminId) {
         Admin admin = new Admin();
@@ -74,7 +79,7 @@ public class AdminDao  {
             insertStm.setString(1, admin.getFirstName());
             insertStm.setString(2, admin.getLastName());
             insertStm.setString(3, admin.getEmail());
-            insertStm.setString(4, admin.getPassword());
+            insertStm.setString(4, hashPassword(admin.getPassword()));
             int result = insertStm.executeUpdate();
 
             if (result != 1) {
@@ -118,7 +123,7 @@ public class AdminDao  {
             statement.setString(1, admin.getFirstName());
             statement.setString(2, admin.getLastName());
             statement.setString(3, admin.getEmail());
-            statement.setString(4, admin.getPassword());
+            statement.setString(4, hashPassword(admin.getPassword()));
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,5 +141,7 @@ public class AdminDao  {
             e.printStackTrace();
         }
     }
+
+   
 
 }
