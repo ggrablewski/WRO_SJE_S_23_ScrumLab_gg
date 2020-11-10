@@ -1,5 +1,7 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.AdminDao;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +19,14 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        AdminDao adminDao = new AdminDao();
+        if(adminDao.verifyEmail(email)&&adminDao.verifyPassword(password)){
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        }else {
+            getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
+        }
     }
 }
