@@ -20,6 +20,11 @@ public class AdminDao  {
     private static final String UPDATE_ADMIN_QUERY= "UPDATE admins SET first_name=?, last_name=?, email=?, password = ? WHERE id=?";
     private static final String CHANGE_SUPER_ADMIN_QUERY = "UPDATE admins SET superadmin=? WHERE id=?";
     private static final String FIND_ADMIN_QUERY = "SELECT * FROM admins WHERE id=?";
+    private static final String VERIFY_EMAIL_QUERY = "SELECT * FROM admins WHERE mail=?";
+    private static final String VERIFY_PASSWORD_QUERY = "SELECT * FROM admins WHERE password=?";
+
+
+
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
@@ -143,4 +148,37 @@ public class AdminDao  {
     }
 
 
+    public boolean verifyEmail(String email){
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(VERIFY_EMAIL_QUERY)
+        ) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if(!resultSet.next()){
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean verifyPassword(String password){
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(VERIFY_PASSWORD_QUERY)
+        ) {
+            statement.setString(1, hashPassword(password));
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if(!resultSet.next()){
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    
 }
