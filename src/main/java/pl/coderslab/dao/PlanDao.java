@@ -14,19 +14,15 @@ import java.util.List;
 
 public class PlanDao {
 
-    private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(id,name,description,created,adminId) VALUES (?,?,?,?,?);";
-    private static final String DELETE_PLAN_QUERY = "DELETE FROM plan where id = ?;";
+    private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name,description,created,adminId) VALUES (?,?,?,?);";
+    private static final String DELETE_PLAN_QUERY = "DELETE FROM plan WHERE id = ?;";
     private static final String FIND_ALL_PLANS_QUERY = "SELECT * FROM plan;";
-    private static final String READ_PLAN_QUERY = "SELECT * from plan where id = ?;";
-    private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ?, WHERE	id = ?;";
+    private static final String FIND_ALL_PLANS_FOR_USER_QUERY = "SELECT * FROM plan WHERE admin_id=?;";
+    private static final String READ_PLAN_QUERY = "SELECT * FROM plan WHERE id = ?;";
+    private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ? WHERE	id = ?;";
 
-    /**
-     * Get book by id
-     *
-     * @param bookId
-     * @return
-     */
-    public Plan read(Integer planId) {
+
+    public Plan readPlan(Integer planId) {
         Plan plan = new Plan();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(READ_PLAN_QUERY)
@@ -34,59 +30,76 @@ public class PlanDao {
             statement.setInt(1, planId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    book.setId(resultSet.getInt("id"));
-                    book.setTitle(resultSet.getString("title"));
-                    book.setAuthor(resultSet.getString("author"));
-                    book.setIsbn(resultSet.getString("isbn"));
+                    plan.setId(resultSet.getInt("id"));
+                    plan.setName(resultSet.getString("name"));
+                    plan.setDescription(resultSet.getString("description"));
+                    plan.setCreated(resultSet.getString("created"));
+                    plan.setAdminId(resultSet.getInt("admin_id"));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return book;
+        return plan;
 
     }
 
-    /**
-     * Return all books
-     *
-     * @return
-     */
-    public List<Book> findAll() {
-        List<Book> bookList = new ArrayList<>();
-        try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_ALL_BOOKS_QUERY);
-             ResultSet resultSet = statement.executeQuery()) {
 
+    public List<Plan> findAll() {
+        List<Plan> plansList = new ArrayList<>();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_PLANS_QUERY);
+             ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                Book bookToAdd = new Book();
-                bookToAdd.setId(resultSet.getInt("id"));
-                bookToAdd.setTitle(resultSet.getString("title"));
-                bookToAdd.setAuthor(resultSet.getString("author"));
-                bookToAdd.setIsbn(resultSet.getString("isbn"));
-                bookList.add(bookToAdd);
+                Plan plan = new Plan();
+                plan.setId(resultSet.getInt("id"));
+                plan.setName(resultSet.getString("name"));
+                plan.setDescription(resultSet.getString("description"));
+                plan.setCreated(resultSet.getString("created"));
+                plan.setAdminId(resultSet.getInt("admin_id"));
+                plansList.add(plan);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return bookList;
+        return plansList;
 
     }
 
-    /**
-     * Create book
-     *
-     * @param book
-     * @return
-     */
-    public Book create(Book book) {
+   public List<Plan> findAllForAdmin(Integer adminId) {
+        List<Plan> plansList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
-             PreparedStatement insertStm = connection.prepareStatement(CREATE_BOOK_QUERY,
+             PreparedStatement statement = connection.prepareStatement(FIND_ALL_PLANS_FOR_USER_QUERY)
+             ) {
+            statement.setInt(1, adminId);
+            try(ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Plan plan = new Plan();
+                    plan.setId(resultSet.getInt("id"));
+                    plan.setName(resultSet.getString("name"));
+                    plan.setDescription(resultSet.getString("description"));
+                    plan.setCreated(resultSet.getString("created"));
+                    plan.setAdminId(resultSet.getInt("admin_id"));
+                    plansList.add(plan);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return plansList;
+
+    }
+
+
+    public Plan create(Plan plan) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement insertStm = connection.prepareStatement(CREATE_PLAN_QUERY,
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
-            insertStm.setString(1, book.getTitle());
-            insertStm.setString(2, book.getAuthor());
-            insertStm.setString(3, book.getIsbn());
+            insertStm.setString(1, plan.getName());
+            insertStm.setString(2, plan.getDescription());
+            insertStm.setString(3, plan.getCreated());
+            insertStm.setInt(4, plan.getAdminId());
             int result = insertStm.executeUpdate();
 
             if (result != 1) {
@@ -95,8 +108,8 @@ public class PlanDao {
 
             try (ResultSet generatedKeys = insertStm.getGeneratedKeys()) {
                 if (generatedKeys.first()) {
-                    book.setId(generatedKeys.getInt(1));
-                    return book;
+                    plan.setId(generatedKeys.getInt(1));
+                    return plan;
                 } else {
                     throw new RuntimeException("Generated key was not found");
                 }
@@ -108,12 +121,7 @@ public class PlanDao {
         return null;
     }
 
-
-    /**
-     * Remove book by id
-     *
-     * @param bookId
-     */
+    
     public void delete(Integer bookId) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_BOOK_QUERY)) {
