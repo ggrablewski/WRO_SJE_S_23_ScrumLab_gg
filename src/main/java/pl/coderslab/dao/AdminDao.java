@@ -1,4 +1,5 @@
 package pl.coderslab.dao;
+import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Admin;
 import pl.coderslab.model.Book;
 import pl.coderslab.utils.DbUtil;
@@ -15,6 +16,7 @@ public class AdminDao  {
     private static final String deleteAdminQuery = "DELETE FROM admins WHERE id = ?";
     private static final String findAllAdminsQuery = "SELECT * FROM admins0";
     private static final String updateAdminQuery = "UPDATE admins SET first_name=?, last_name=?, email=?, password = ? WHERE id=?";
+    private static final String changeSuperadminQuery = "UPDATE admins SET superadmin=? WHERE id=?";
     private static final String findAdminQuery = "SELECT * FROM admins WHERE id=?";
 
     public Admin read(Integer adminId) {
@@ -92,6 +94,47 @@ public class AdminDao  {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void delete(Integer adminId) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(deleteAdminQuery)) {
+            statement.setInt(1, adminId);
+            statement.executeUpdate();
+
+            boolean deleted = statement.execute();
+            if (!deleted) {
+                throw new NotFoundException("Product not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Admin admin) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(updateAdminQuery)) {
+            statement.setInt(5, admin.getId());
+            statement.setString(1, admin.getFirstName());
+            statement.setString(2, admin.getLastName());
+            statement.setString(3, admin.getEmail());
+            statement.setString(4, admin.getPassword());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void changeIfSuperadmin(Integer adminId, Integer ifSuperadmin){
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(changeSuperadminQuery)) {
+            statement.setInt(2, adminId);
+            statement.setInt(1, ifSuperadmin);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

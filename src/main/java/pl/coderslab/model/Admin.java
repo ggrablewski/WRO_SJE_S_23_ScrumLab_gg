@@ -14,7 +14,7 @@ public class Admin {
     int superadmin = 0;
     int enable =1;
 
-    public Admin(int id, String firstName, String lastName, String email, String password, int superadmin) {
+    public Admin(int id, String firstName, String lastName, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
