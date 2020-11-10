@@ -18,7 +18,7 @@ public class DbUtil {
         if (dataSource == null) {
             try {
                 Context context = new InitialContext();
-                dataSource = (DataSource) context.lookup("java:comp/env/jdbc/scrumlab?serverTimezone=UTC&useSSL=false&characterEncoding=utf8");
+                dataSource = (DataSource) context.lookup("java:comp/env/jdbc/scrumlab");
             } catch (NamingException e) {
                 e.printStackTrace();
             }

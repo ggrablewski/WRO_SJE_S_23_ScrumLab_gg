@@ -16,7 +16,7 @@ import java.util.List;
 public class AdminDao  {
     private static final String createAdminQuery = "INSERT INTO admins(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
     private static final String deleteAdminQuery = "DELETE FROM admins WHERE id = ?";
-    private static final String findAllAdminsQuery = "SELECT * FROM admins0";
+    private static final String findAllAdminsQuery = "SELECT * FROM admins";
     private static final String updateAdminQuery = "UPDATE admins SET first_name=?, last_name=?, email=?, password = ? WHERE id=?";
     private static final String changeSuperadminQuery = "UPDATE admins SET superadmin=? WHERE id=?";
     private static final String findAdminQuery = "SELECT * FROM admins WHERE id=?";
@@ -142,6 +142,5 @@ public class AdminDao  {
         }
     }
 
-   
 
 }
