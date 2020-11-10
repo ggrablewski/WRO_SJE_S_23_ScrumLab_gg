@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false" %>
 
 <header class="page-header">
     <nav class="navbar navbar-expand-lg justify-content-around">

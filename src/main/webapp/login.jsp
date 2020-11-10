@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="false" %>
 
 <html lang="pl">
 <head>
@@ -16,6 +17,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
+
 
 <section class="dashboard-section">
     <div class="container pt-4 pb-4">
