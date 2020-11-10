@@ -1,7 +1,6 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
-import pl.coderslab.model.Book;
 import pl.coderslab.model.Plan;
 import pl.coderslab.utils.DbUtil;
 
@@ -14,12 +13,12 @@ import java.util.List;
 
 public class PlanDao {
 
-    private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name,description,created,adminId) VALUES (?,?,?,?);";
+    private static final String CREATE_PLAN_QUERY = "INSERT INTO plan(name,description,created,admin_id) VALUES (?,?, NOW(),?);";
     private static final String DELETE_PLAN_QUERY = "DELETE FROM plan WHERE id = ?;";
     private static final String FIND_ALL_PLANS_QUERY = "SELECT * FROM plan;";
     private static final String FIND_ALL_PLANS_FOR_USER_QUERY = "SELECT * FROM plan WHERE admin_id=?;";
     private static final String READ_PLAN_QUERY = "SELECT * FROM plan WHERE id = ?;";
-    private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ? WHERE	id = ?;";
+    private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ? WHERE id = ?;";
 
 
     public Plan readPlan(Integer planId) {
@@ -98,10 +97,8 @@ public class PlanDao {
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
             insertStm.setString(1, plan.getName());
             insertStm.setString(2, plan.getDescription());
-            insertStm.setString(3, plan.getCreated());
-            insertStm.setInt(4, plan.getAdminId());
+            insertStm.setInt(3, plan.getAdminId());
             int result = insertStm.executeUpdate();
-
             if (result != 1) {
                 throw new RuntimeException("Execute update returned " + result);
             }
@@ -121,13 +118,12 @@ public class PlanDao {
         return null;
     }
 
-    
-    public void delete(Integer bookId) {
-        try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_BOOK_QUERY)) {
-            statement.setInt(1, bookId);
-            statement.executeUpdate();
 
+    public void delete(Integer planId) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_PLAN_QUERY)) {
+            statement.setInt(1, planId);
+            statement.executeUpdate();
             boolean deleted = statement.execute();
             if (!deleted) {
                 throw new NotFoundException("Product not found");
@@ -138,19 +134,13 @@ public class PlanDao {
     }
 
 
-    /**
-     * Update book
-     *
-     * @param book
-     */
-    public void update(Book book) {
-        try (Connection connection = DbUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(UPDATE_BOOK_QUERY)) {
-            statement.setInt(4, book.getId());
-            statement.setString(1, book.getTitle());
-            statement.setString(2, book.getAuthor());
-            statement.setString(3, book.getIsbn());
 
+    public void update(Plan plan) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_PLAN_QUERY)) {
+            statement.setInt(3, plan.getId());
+            statement.setString(1, plan.getName());
+            statement.setString(2, plan.getDescription());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

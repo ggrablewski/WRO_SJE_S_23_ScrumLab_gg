@@ -1,5 +1,10 @@
 package pl.coderslab.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @AllArgsConstructor @NoArgsConstructor
 public class Plan {
 
     private int id;
@@ -9,55 +14,15 @@ public class Plan {
     private int adminId;
 
 
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Plan(String name, String description, int adminId) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public int getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
-
-    public Plan() {
-    }
-
-    public Plan(int id, String name, String description, String created, int adminId) {
+    public Plan(int id, String name, String description, int adminId) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.created = created;
         this.adminId = adminId;
     }
 }
