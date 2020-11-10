@@ -1,4 +1,5 @@
 package pl.coderslab.dao;
+
 import org.mindrot.jbcrypt.BCrypt;
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Admin;
@@ -12,14 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
-public class AdminDao  {
+public class AdminDao {
     private static final String CREATE_ADMIN_QUERY = "INSERT INTO admins(first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
     private static final String DELETE_ADMIN_QUERY = "DELETE FROM admins WHERE id = ?";
     private static final String FIND_ALL_ADMIN_QUERY = "SELECT * FROM admins";
-    private static final String UPDATE_ADMIN_QUERY= "UPDATE admins SET first_name=?, last_name=?, email=?, password = ? WHERE id=?";
+    private static final String UPDATE_ADMIN_QUERY = "UPDATE admins SET first_name=?, last_name=?, email=?, password = ? WHERE id=?";
     private static final String CHANGE_SUPER_ADMIN_QUERY = "UPDATE admins SET superadmin=? WHERE id=?";
     private static final String FIND_ADMIN_QUERY = "SELECT * FROM admins WHERE id=?";
+    private static final String VERIFY_EMAIL_QUERY = "SELECT * FROM admins WHERE email=?";
+    private static final String VERIFY_PASSWORD_QUERY = "SELECT * FROM admins WHERE password=?";
+    private static final String VERIFY_SUPERADMIN_QUERY = "SELECT * FROM admins WHERE password=? AND superadmin=1";
+
+
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
@@ -131,7 +136,7 @@ public class AdminDao  {
 
     }
 
-    public void changeIfSuperadmin(Integer adminId, Integer ifSuperadmin){
+    public void changeIfSuperadmin(Integer adminId, Integer ifSuperadmin) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(CHANGE_SUPER_ADMIN_QUERY)) {
             statement.setInt(2, adminId);
@@ -140,6 +145,49 @@ public class AdminDao  {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public boolean verifyLogin(String email, String password) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(VERIFY_EMAIL_QUERY)
+        ) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (!resultSet.next()) {
+                    System.out.println("login");
+                    return false;
+                } else {
+                    String hashed = resultSet.getString("password");
+                    System.out.println(hashed);
+                    if(!BCrypt.checkpw(password, hashed)){
+                        System.out.println("hasło");
+                        return false;
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+
+    public boolean verifySuperAdmin(int id) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(VERIFY_SUPERADMIN_QUERY)
+        ) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (!resultSet.next()) {
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
 

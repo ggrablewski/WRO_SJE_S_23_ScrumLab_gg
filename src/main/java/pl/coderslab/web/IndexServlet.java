@@ -14,9 +14,6 @@ import java.util.List;
 public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DayNameDao dayNameDao = new DayNameDao();
-        List<DayName> dayNames = dayNameDao.findAll();
-        System.out.println(dayNames);
 
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
