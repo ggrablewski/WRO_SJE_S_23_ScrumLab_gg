@@ -22,6 +22,7 @@ public class AdminDao  {
     private static final String FIND_ADMIN_QUERY = "SELECT * FROM admins WHERE id=?";
     private static final String VERIFY_EMAIL_QUERY = "SELECT * FROM admins WHERE mail=?";
     private static final String VERIFY_PASSWORD_QUERY = "SELECT * FROM admins WHERE password=?";
+    private static final String VERIFY_SUPERADMIN_QUERY = "SELECT * FROM admins WHERE password=? AND superadmin=1";
 
 
 
@@ -180,5 +181,23 @@ public class AdminDao  {
         return true;
     }
 
-    
+
+    public boolean verifySuperAdmin(int id){
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(VERIFY_SUPERADMIN_QUERY)
+        ) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if(!resultSet.next()){
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+
+
 }
