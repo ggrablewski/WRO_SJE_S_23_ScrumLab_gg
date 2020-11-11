@@ -2,12 +2,10 @@ package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Plan;
+import pl.coderslab.model.PlanDetails;
 import pl.coderslab.utils.DbUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +18,16 @@ public class PlanDao {
     private static final String COUNT_ALL_PLANS_FOR_USER_QUERY = "SELECT COUNT(*) FROM plan WHERE admin_id=?;";
     private static final String READ_PLAN_QUERY = "SELECT * FROM plan WHERE id = ?;";
     private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ? WHERE id = ?;";
+    private static final String SELECT_LAST_PLAN_QUERY =
+            "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description " +
+                    "FROM `recipe_plan` " +
+                    "JOIN day_name on day_name.id=day_name_id " +
+                    "JOIN recipe on recipe.id=recipe_id WHERE " +
+                    "recipe_plan.plan_id =  (SELECT MAX(id) from plan WHERE admin_id = ?) " +
+                    "ORDER by day_name.display_order, recipe_plan.display_order";
 
 
-    public static  Plan readPlan(Integer planId) {
+    public static Plan readPlan(Integer planId) {
         Plan plan = new Plan();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(READ_PLAN_QUERY)
@@ -45,7 +50,7 @@ public class PlanDao {
     }
 
 
-    public static  List<Plan> findAll() {
+    public static List<Plan> findAll() {
         List<Plan> plansList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_PLANS_QUERY);
@@ -67,13 +72,13 @@ public class PlanDao {
 
     }
 
-   public  static List<Plan> findAllForAdmin(Integer adminId) {
+    public static List<Plan> findAllForAdmin(Integer adminId) {
         List<Plan> plansList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_PLANS_FOR_USER_QUERY)
-             ) {
+        ) {
             statement.setInt(1, adminId);
-            try(ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Plan plan = new Plan();
                     plan.setId(resultSet.getInt("id"));
@@ -92,7 +97,7 @@ public class PlanDao {
     }
 
 
-    public  static Plan create(Plan plan) {
+    public static Plan create(Plan plan) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement insertStm = connection.prepareStatement(CREATE_PLAN_QUERY,
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -120,7 +125,7 @@ public class PlanDao {
     }
 
 
-    public  static void delete(Integer planId) {
+    public static void delete(Integer planId) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_PLAN_QUERY)) {
             statement.setInt(1, planId);
@@ -135,8 +140,7 @@ public class PlanDao {
     }
 
 
-
-    public static  void update(Plan plan) {
+    public static void update(Plan plan) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PLAN_QUERY)) {
             statement.setInt(3, plan.getId());
@@ -149,11 +153,11 @@ public class PlanDao {
 
     }
 
-    public  static int countPlans(int id){
-        try(Connection connection = DbUtil.getConnection();
-        PreparedStatement statement = connection.prepareStatement(COUNT_ALL_PLANS_FOR_USER_QUERY)){
+    public static int countPlans(int id) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(COUNT_ALL_PLANS_FOR_USER_QUERY)) {
             statement.setInt(1, id);
-            try(ResultSet resultSet = statement.executeQuery()){
+            try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
                 return resultSet.getInt("COUNT(*)");
             }
@@ -161,5 +165,22 @@ public class PlanDao {
             throwables.printStackTrace();
         }
         return -1;
+    }
+
+    public static PlanDetails getLastPlan(int adminId) {
+        try (Connection connection = DbUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(SELECT_LAST_PLAN_QUERY);
+            statement.setInt(1, adminId);
+            ResultSet resultSet = statement.executeQuery();
+            PlanDetails lastPlan = new PlanDetails();
+            lastPlan.setDayName(resultSet.getString("day_name"));
+            lastPlan.setMealName(resultSet.getString("meal_name"));
+            lastPlan.setRecipeName(resultSet.getString("recipe_name"));
+            lastPlan.setRecipeDesc(resultSet.getString("recipe_description"));
+            return lastPlan;
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 }
