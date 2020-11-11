@@ -24,10 +24,11 @@ public class DashboardServlet extends HttpServlet {
         int adminId =(int) session.getAttribute("adminId");
         req.setAttribute("planCount", PlanDao.countPlans(adminId));
         req.setAttribute("recipeCount", RecipeDao.countRecipes(adminId));
-        List<LastPlanDetails> list = PlanDao.getLastPlan(1);
+        List<LastPlanDetails> list = PlanDao.getLastPlan(adminId);
         req.setAttribute("planName", PlanDao.lastPlanName(adminId));
         req.setAttribute("days", DayNameDao.findAll());
         req.setAttribute("meals", list);
+        req.setAttribute("admin", AdminDao.read(adminId));
         getServletContext().getRequestDispatcher("/app/dashboard.jsp").forward(req,resp);
     }
 }
