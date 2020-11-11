@@ -20,6 +20,7 @@ public class PlanDao {
     private static final String FIND_ALL_PLANS_FOR_USER_QUERY = "SELECT * FROM plan WHERE admin_id=?;";
     private static final String COUNT_ALL_PLANS_FOR_USER_QUERY = "SELECT COUNT(*) FROM plan WHERE admin_id=?;";
     private static final String READ_PLAN_QUERY = "SELECT * FROM plan WHERE id = ?;";
+    private static final String READ_LAST_PLAN_NAME_QUERY = "SELECT name FROM plan WHERE id = (SELECT MAX(id) from plan WHERE admin_id = ?);";
     private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ? WHERE id = ?;";
     private static final String SELECT_LAST_PLAN_QUERY =
             "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description " +
@@ -176,8 +177,8 @@ public class PlanDao {
             statement.setInt(1, adminId);
             ResultSet resultSet = statement.executeQuery();
             List<LastPlanDetails> lastPlan = new ArrayList<>();
-            LastPlanDetails planDetails = new LastPlanDetails();
             while (resultSet.next()) {
+                LastPlanDetails planDetails = new LastPlanDetails();
                 planDetails.setDayName(resultSet.getString("day_name"));
                 planDetails.setMealName(resultSet.getString("meal_name"));
                 planDetails.setRecipeName(resultSet.getString("recipe_name"));
@@ -190,4 +191,22 @@ public class PlanDao {
         }
         return null;
     }
+
+    public static String lastPlanName(int adminId) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_LAST_PLAN_NAME_QUERY)
+        ) {
+            statement.setInt(1, adminId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                return resultSet.getString("name");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+
 }

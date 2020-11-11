@@ -17,6 +17,7 @@ private static final String CREATE_RECIPE_QUERY = "INSERT INTO recipe(name,ingre
         "preparation_time,preparation,admin_id) VALUES (?,?,?,NOW(),NOW(),?,?,?);";
 private static final String DELETE_RECIPE_QUERY = "DELETE FROM recipe where id = ?;";
 private static final String FIND_ALL_RECIPES_QUERY = "SELECT * FROM recipe;";
+private static final String COUNT_ALL_RECIPES_FOR_USER_QUERY = "SELECT COUNT(*) FROM recipe WHERE admin_id=?;";
 private static final String READ_RECIPE_QUERY = "SELECT * from recipe where id = ?;";
 private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ? ingredients = ? description = ? " +
         "updated = NOW() preparation_time = ? preparation = ? admin_id = ? WHERE id = ?;";
@@ -133,4 +134,19 @@ private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ? in
             e.printStackTrace();
         }
     }
+
+    public static int countRecipes(int id){
+        try(Connection connection = DbUtil.getConnection();
+            PreparedStatement statement = connection.prepareStatement(COUNT_ALL_RECIPES_FOR_USER_QUERY)){
+            statement.setInt(1, id);
+            try(ResultSet resultSet = statement.executeQuery()){
+                resultSet.next();
+                return resultSet.getInt("COUNT(*)");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+    }
+    
 }

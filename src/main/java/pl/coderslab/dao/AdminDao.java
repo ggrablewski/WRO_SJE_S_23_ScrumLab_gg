@@ -21,8 +21,8 @@ public class AdminDao {
     private static final String CHANGE_SUPER_ADMIN_QUERY = "UPDATE admins SET superadmin=? WHERE id=?";
     private static final String FIND_ADMIN_QUERY = "SELECT * FROM admins WHERE id=?";
     private static final String VERIFY_EMAIL_QUERY = "SELECT * FROM admins WHERE email=?";
-    private static final String VERIFY_PASSWORD_QUERY = "SELECT * FROM admins WHERE password=?";
     private static final String VERIFY_SUPERADMIN_QUERY = "SELECT * FROM admins WHERE password=? AND superadmin=1";
+    private static final String FIND_ADMIN_ID = "SELECT id FROM admins WHERE email=?";
 
 
     public static String hashPassword(String password) {
@@ -190,5 +190,19 @@ public class AdminDao {
         return true;
     }
 
+    public static int getAdminId(String email) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ADMIN_ID)
+        ) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                return resultSet.getInt("id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
 
+    }
 }

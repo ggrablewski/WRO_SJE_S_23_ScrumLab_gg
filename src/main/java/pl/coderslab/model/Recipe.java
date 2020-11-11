@@ -29,7 +29,8 @@ public class Recipe {
         this.admin_id = admin_id;
     }
 
-// to jest ładny toString
+
+    // to jest ładny toString
     @Override
     public String toString() {
         return "Przepis na " + name +

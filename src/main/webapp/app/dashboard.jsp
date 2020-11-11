@@ -1,6 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html lang="pl">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
 
 <head>
     <meta charset="utf-8">
@@ -15,17 +21,7 @@
 </head>
 
 <body>
-<header class="page-header">
-    <nav class="navbar navbar-expand-lg justify-content-between">
-        <a href="/dashboard" class="navbar-brand main-logo main-logo-smaller">
-            Zaplanuj <span>Jedzonko</span>
-        </a>
-        <div class="d-flex justify-content-around">
-            <h4 class="text-light mr-3">Imię</h4>
-            <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
-        </div>
-    </nav>
-</header>
+<jsp:include page="header-dashboard.jsp"/>
 
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
@@ -94,70 +90,49 @@
                 <div class="dashboard-alerts">
                     <div class="alert-item alert-info">
                         <i class="fas icon-circle fa-info-circle"></i>
-                        <span class="font-weight-bold">Liczba przepisów: 1</span>
+                        <span class="font-weight-bold">Liczba przepisów: <c:out value="${recipeCount}"/></span>
                     </div>
                     <div class="alert-item alert-light">
                         <i class="far icon-calendar fa-calendar-alt"></i>
-                        <span class="font-weight-bold">Liczba planów: 1</span>
+                        <span class="font-weight-bold">Liczba planów: <c:out value="${planCount}"/></span>
                     </div>
                 </div>
             </div>
             <div class="m-4 p-4 border-dashed">
                 <h2 class="dashboard-content-title">
-                    <span>Ostatnio dodany plan:</span> Plan jak u mamy
+                    <span>Ostatnio dodany plan:</span> <c:out value="${planName}"/>
                 </h2>
-                <table class="table">
-                    <thead>
-                    <tr class="d-flex">
-                        <th class="col-2">Poniedziałek</th>
-                        <th class="col-8"></th>
-                        <th class="col-2"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="d-flex">
-                        <td class="col-2">śniadanie</td>
-                        <td class="col-8">płatki owsiane z jagodami i komosą ryżową</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    <tr class="d-flex">
-                        <td class="col-2">śniadanie</td>
-                        <td class="col-8">kanapka z pastą rybną</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    <tr class="d-flex">
-                        <td class="col-2">obiad</td>
-                        <td class="col-8">zupa pomidorowa</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <table class="table">
-                    <thead>
-                    <tr class="d-flex">
-                        <th class="col-2">Wtorek</th>
-                        <th class="col-8"></th>
-                        <th class="col-2"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="d-flex">
-                        <td class="col-2">śniadanie</td>
-                        <td class="col-8">płatki owsiane z jagodami i komosą ryżową</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    <tr class="d-flex">
-                        <td class="col-2">drugie śniadanie</td>
-                        <td class="col-8">pączki</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    <tr class="d-flex">
-                        <td class="col-2">obiad</td>
-                        <td class="col-8">schabowy w panierce</td>
-                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
-                    </tr>
-                    </tbody>
-                </table>
+
+                    <c:forEach items="${days}" var="day">
+                        <c:set var="continueExecuting" scope="request" value="false"/>
+                        <c:forEach items="${meals}" var="meal">
+                            <c:if test="${day.name.equals(meal.dayName)}">
+                                <c:set var="continueExecuting" scope="request" value="true"/>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${continueExecuting==true}">
+                        <table class="table">
+                        <thead>
+                        <tr class="d-flex">
+                            <th class="col-2">${fn:toUpperCase(fn:substring(day.name, 0, 1))}${fn:toLowerCase(fn:substring(day.name, 1,fn:length(day.name)))}</th>
+                            <th class="col-8"></th>
+                            <th class="col-2"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${meals}" var="meal">
+                            <c:if test="${day.name.equals(meal.dayName)}">
+                            <tr class="d-flex">
+                                <td class="col-2">${meal.mealName}</td>
+                                <td class="col-8">${meal.recipeName}</td>
+                                <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
+                            </tr>
+                        </c:if>
+                        </c:forEach>
+                        </tbody>
+                        </table>
+                    </c:if>
+                    </c:forEach>
             </div>
         </div>
     </div>
