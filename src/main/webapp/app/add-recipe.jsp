@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<jsp:include page="app/header-dashboard.jsp"/>
+<jsp:include page="/app/header-dashboard.jsp"/>
 
 
 <section class="dashboard-section">

@@ -13,13 +13,13 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Slf4j
-@WebServlet("/recipe/add")
+@WebServlet("/recipe-add")
 public class AddRecipesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("/add-recipe.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/app/add-recipe.jsp").forward(req, resp);
     }
 
     @Override

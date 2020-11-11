@@ -27,13 +27,13 @@
     <div class="row dashboard-nowrap">
         <ul class="nav flex-column long-bg">
             <li class="nav-item">
-                <a class="nav-link" href="/dashboard.html">
+                <a class="nav-link" href="/dashboard">
                     <span>Pulpit</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/app-recipes.html">
+                <a class="nav-link" href="/recipes">
                     <span>Przepisy</span>
                     <i class="fas fa-angle-right"></i>
                 </a>
@@ -68,13 +68,13 @@
             <div class="dashboard-header m-4">
                 <div class="dashboard-menu">
                     <div class="menu-item border-dashed">
-                        <a href="">
+                        <a href="/recipe-add">
                             <i class="far fa-plus-square icon-plus-square"></i>
                             <span class="title">dodaj przepis</span>
                         </a>
                     </div>
                     <div class="menu-item border-dashed">
-                        <a href="">
+                        <a href="/plan-add">
                             <i class="far fa-plus-square icon-plus-square"></i>
                             <span class="title">dodaj plan</span>
                         </a>
