@@ -23,7 +23,7 @@ public class PlanDao {
     private static final String READ_LAST_PLAN_NAME_QUERY = "SELECT name FROM plan WHERE id = (SELECT MAX(id) from plan WHERE admin_id = ?);";
     private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ? WHERE id = ?;";
     private static final String SELECT_LAST_PLAN_QUERY =
-            "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description " +
+            "SELECT day_name.name as day_name, meal_name, recipe.name as recipe_name, recipe.description as recipe_description, recipe.id as id " +
                     "FROM `recipe_plan` " +
                     "JOIN day_name on day_name.id=day_name_id " +
                     "JOIN recipe on recipe.id=recipe_id WHERE " +
@@ -183,6 +183,7 @@ public class PlanDao {
                 planDetails.setMealName(resultSet.getString("meal_name"));
                 planDetails.setRecipeName(resultSet.getString("recipe_name"));
                 planDetails.setRecipeDesc(resultSet.getString("recipe_description"));
+                planDetails.setRecipeId(resultSet.getInt("id"));
                 lastPlan.add(planDetails);
             }
             return lastPlan;

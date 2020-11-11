@@ -125,7 +125,7 @@
                             <tr class="d-flex">
                                 <td class="col-2">${meal.mealName}</td>
                                 <td class="col-8">${meal.recipeName}</td>
-                                <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
+                                <td class="col-2"><a href="/recipeDetails?id=${meal.recipeId}" class="btn btn-primary rounded-0">Szczegóły</a></td>
                             </tr>
                         </c:if>
                         </c:forEach>

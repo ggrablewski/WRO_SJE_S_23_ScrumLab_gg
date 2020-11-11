@@ -5,7 +5,6 @@ import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
 import pl.coderslab.model.LastPlanDetails;
-import pl.coderslab.model.Plan;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

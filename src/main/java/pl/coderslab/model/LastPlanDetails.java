@@ -10,4 +10,5 @@ public class LastPlanDetails {
     private String mealName;
     private String recipeName;
     private String recipeDesc;
+    private int recipeId;
 }
