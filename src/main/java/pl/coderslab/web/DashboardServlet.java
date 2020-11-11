@@ -1,6 +1,7 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.AdminDao;
+import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
 
@@ -20,6 +21,7 @@ public class DashboardServlet extends HttpServlet {
         int adminId =(int) session.getAttribute("adminId");
         req.setAttribute("planCount", PlanDao.countPlans(adminId));
         req.setAttribute("recipeCount", RecipeDao.countRecipes(adminId));
+        req.setAttribute("days", DayNameDao.findAll());
         getServletContext().getRequestDispatcher("/app/dashboard.jsp").forward(req,resp);
     }
 }
