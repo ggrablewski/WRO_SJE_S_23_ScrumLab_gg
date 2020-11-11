@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -96,80 +98,39 @@
             </div>
             <div class="m-4 p-4 border-dashed">
                 <h2 class="dashboard-content-title">
-                    <span>Ostatnio dodany plan:</span> <c:out value="${lastPlan.name}"/>
+                    <span>Ostatnio dodany plan:</span> <c:out value="${planName}"/>
                 </h2>
 
                     <c:forEach items="${days}" var="day">
+                        <c:set var="continueExecuting" scope="request" value="false"/>
+                        <c:forEach items="${meals}" var="meal">
+                            <c:if test="${day.name.equals(meal.dayName)}">
+                                <c:set var="continueExecuting" scope="request" value="true"/>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${continueExecuting==true}">
                         <table class="table">
                         <thead>
                         <tr class="d-flex">
-                            <th class="col-2"><c:out value="${day[0][0]}"/></th>
+                            <th class="col-2">${fn:toUpperCase(fn:substring(day.name, 0, 1))}${fn:toLowerCase(fn:substring(day.name, 1,fn:length(day.name)))}</th>
                             <th class="col-8"></th>
                             <th class="col-2"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${day[0]}" var="meal">
+                        <c:forEach items="${meals}" var="meal">
+                            <c:if test="${day.name.equals(meal.dayName)}">
                             <tr class="d-flex">
-                                <td class="col-2">${meal[1]}</td>
-                                <td class="col-8">${meal[2]}</td>
+                                <td class="col-2">${meal.mealName}</td>
+                                <td class="col-8">${meal.recipeName}</td>
                                 <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>
                             </tr>
+                        </c:if>
                         </c:forEach>
                         </tbody>
                         </table>
+                    </c:if>
                     </c:forEach>
-<%--                    <thead>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th class="col-2"><c:out value="${day}"/></th>--%>
-<%--                        <th class="col-8"></th>--%>
-<%--                        <th class="col-2"></th>--%>
-<%--                    </tr>--%>
-<%--                    </thead>--%>
-<%--                    <tbody>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <td class="col-2">śniadanie</td>--%>
-<%--                        <td class="col-8">płatki owsiane z jagodami i komosą ryżową</td>--%>
-<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <td class="col-2">śniadanie</td>--%>
-<%--                        <td class="col-8">kanapka z pastą rybną</td>--%>
-<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <td class="col-2">obiad</td>--%>
-<%--                        <td class="col-8">zupa pomidorowa</td>--%>
-<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
-<%--                    </tr>--%>
-<%--                    </tbody>--%>
-<%--                </table>--%>
-<%--                <table class="table">--%>
-<%--                    <thead>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th class="col-2">Wtorek</th>--%>
-<%--                        <th class="col-8"></th>--%>
-<%--                        <th class="col-2"></th>--%>
-<%--                    </tr>--%>
-<%--                    </thead>--%>
-<%--                    <tbody>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <td class="col-2">śniadanie</td>--%>
-<%--                        <td class="col-8">płatki owsiane z jagodami i komosą ryżową</td>--%>
-<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <td class="col-2">drugie śniadanie</td>--%>
-<%--                        <td class="col-8">pączki</td>--%>
-<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <td class="col-2">obiad</td>--%>
-<%--                        <td class="col-8">schabowy w panierce</td>--%>
-<%--                        <td class="col-2"><button type="button" class="btn btn-primary rounded-0">Szczegóły</button></td>--%>
-<%--                    </tr>--%>
-<%--                    </tbody>--%>
-<%--                </table>--%>
             </div>
         </div>
     </div>
