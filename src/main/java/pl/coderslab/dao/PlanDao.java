@@ -22,7 +22,7 @@ public class PlanDao {
     private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ? WHERE id = ?;";
 
 
-    public Plan readPlan(Integer planId) {
+    public static  Plan readPlan(Integer planId) {
         Plan plan = new Plan();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(READ_PLAN_QUERY)
@@ -45,7 +45,7 @@ public class PlanDao {
     }
 
 
-    public List<Plan> findAll() {
+    public static  List<Plan> findAll() {
         List<Plan> plansList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_PLANS_QUERY);
@@ -67,7 +67,7 @@ public class PlanDao {
 
     }
 
-   public List<Plan> findAllForAdmin(Integer adminId) {
+   public  static List<Plan> findAllForAdmin(Integer adminId) {
         List<Plan> plansList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_PLANS_FOR_USER_QUERY)
@@ -92,7 +92,7 @@ public class PlanDao {
     }
 
 
-    public Plan create(Plan plan) {
+    public  static Plan create(Plan plan) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement insertStm = connection.prepareStatement(CREATE_PLAN_QUERY,
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -120,7 +120,7 @@ public class PlanDao {
     }
 
 
-    public void delete(Integer planId) {
+    public  static void delete(Integer planId) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_PLAN_QUERY)) {
             statement.setInt(1, planId);
@@ -136,7 +136,7 @@ public class PlanDao {
 
 
 
-    public void update(Plan plan) {
+    public static  void update(Plan plan) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PLAN_QUERY)) {
             statement.setInt(3, plan.getId());
@@ -149,7 +149,7 @@ public class PlanDao {
 
     }
 
-    public int countPlans(int id){
+    public  static int countPlans(int id){
         try(Connection connection = DbUtil.getConnection();
         PreparedStatement statement = connection.prepareStatement(COUNT_ALL_PLANS_FOR_USER_QUERY)){
             statement.setInt(1, id);

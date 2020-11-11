@@ -23,8 +23,7 @@ public class RegisterServlet extends HttpServlet {
         newAdmin.setEnable(0);
         newAdmin.setSuperadmin(0);
 
-        AdminDao newAdminDao = new AdminDao();
-        newAdmin = newAdminDao.create(newAdmin);
+        newAdmin = AdminDao.create(newAdmin);
 //        TODO zmienić w xml ścieżkę zapisu logów (później se o tym poczytam)
         log.info("Dodano użytkownika %s", newAdmin);
 

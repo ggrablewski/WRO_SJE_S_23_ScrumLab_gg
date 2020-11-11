@@ -21,15 +21,15 @@ public class AdminDao {
     private static final String CHANGE_SUPER_ADMIN_QUERY = "UPDATE admins SET superadmin=? WHERE id=?";
     private static final String FIND_ADMIN_QUERY = "SELECT * FROM admins WHERE id=?";
     private static final String VERIFY_EMAIL_QUERY = "SELECT * FROM admins WHERE email=?";
-    private static final String VERIFY_PASSWORD_QUERY = "SELECT * FROM admins WHERE password=?";
     private static final String VERIFY_SUPERADMIN_QUERY = "SELECT * FROM admins WHERE password=? AND superadmin=1";
+    private static final String FIND_ADMIN_ID = "SELECT id FROM admins WHERE email=?";
 
 
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public Admin read(Integer adminId) {
+    public static Admin read(Integer adminId) {
         Admin admin = new Admin();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ADMIN_QUERY)
@@ -53,7 +53,7 @@ public class AdminDao {
 
     }
 
-    public List<Admin> findAll() {
+    public  static List<Admin> findAll() {
         List<Admin> adminList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_ADMIN_QUERY);
@@ -77,7 +77,7 @@ public class AdminDao {
 
     }
 
-    public Admin create(Admin admin) {
+    public static  Admin create(Admin admin) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement insertStm = connection.prepareStatement(CREATE_ADMIN_QUERY,
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -106,7 +106,7 @@ public class AdminDao {
         return null;
     }
 
-    public void delete(Integer adminId) {
+    public static  void delete(Integer adminId) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_ADMIN_QUERY)) {
             statement.setInt(1, adminId);
@@ -121,7 +121,7 @@ public class AdminDao {
         }
     }
 
-    public void update(Admin admin) {
+    public  static void update(Admin admin) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ADMIN_QUERY)) {
             statement.setInt(5, admin.getId());
@@ -136,7 +136,7 @@ public class AdminDao {
 
     }
 
-    public void changeIfSuperadmin(Integer adminId, Integer ifSuperadmin) {
+    public static  void changeIfSuperadmin(Integer adminId, Integer ifSuperadmin) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(CHANGE_SUPER_ADMIN_QUERY)) {
             statement.setInt(2, adminId);
@@ -148,7 +148,7 @@ public class AdminDao {
     }
 
 
-    public boolean verifyLogin(String email, String password) {
+    public  static boolean verifyLogin(String email, String password) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(VERIFY_EMAIL_QUERY)
         ) {
@@ -174,7 +174,7 @@ public class AdminDao {
     }
 
 
-    public boolean verifySuperAdmin(int id) {
+    public  static boolean verifySuperAdmin(int id) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(VERIFY_SUPERADMIN_QUERY)
         ) {
@@ -188,5 +188,21 @@ public class AdminDao {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public static int getAdminId(String email) {
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(FIND_ADMIN_ID)
+        ) {
+            statement.setString(1, email);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                return resultSet.getInt("id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+
     }
 }
