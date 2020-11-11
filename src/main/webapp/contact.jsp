@@ -28,9 +28,9 @@
         <div class="border-dashed view-height">
             <div class="container w-25">
                 <p> Maria Iksińska ZaplanujJedzonko.pl</p><br/>
-                <p> Adres e-mail: maria.iksinska@zaplanujjedzonko.pl</p><br/>
-                <p> Telefon do biura: +22 123 45 67</p><br/>
-                <p> facebook: https://www.facebook.com/maria.iksinska</p><br/>
+                <p> Adres e-mail: <a href="mailto:maria.iksinska@zaplanujjedzonko.pl">maria.iksinska@zaplanujjedzonko.pl</a></p><br/>
+                <p> Telefon do biura:<br/>+22 123 45 67</p><br/>
+                <p> facebook: <a href="https://www.facebook.com/maria.iksinska">www.facebook.com/maria.iksinska</a></p><br/>
             </div>
         </div>
     </div>
