@@ -2,6 +2,7 @@ package pl.coderslab.web;
 
 import pl.coderslab.dao.AdminDao;
 import pl.coderslab.dao.PlanDao;
+import pl.coderslab.dao.RecipeDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +19,7 @@ public class DashboardServlet extends HttpServlet {
         HttpSession session = req.getSession();
         int adminId =(int) session.getAttribute("adminId");
         req.setAttribute("planCount", PlanDao.countPlans(adminId));
+        req.setAttribute("recipeCount", RecipeDao.countRecipes(adminId));
         getServletContext().getRequestDispatcher("/app/dashboard.jsp").forward(req,resp);
     }
 }

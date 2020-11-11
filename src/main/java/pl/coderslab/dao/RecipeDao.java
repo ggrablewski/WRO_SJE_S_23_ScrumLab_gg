@@ -135,7 +135,7 @@ private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ? in
         }
     }
 
-    public int countRecipes(int id){
+    public static int countRecipes(int id){
         try(Connection connection = DbUtil.getConnection();
             PreparedStatement statement = connection.prepareStatement(COUNT_ALL_RECIPES_FOR_USER_QUERY)){
             statement.setInt(1, id);
