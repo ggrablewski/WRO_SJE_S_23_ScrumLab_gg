@@ -17,6 +17,7 @@ public class PlanDao {
     private static final String DELETE_PLAN_QUERY = "DELETE FROM plan WHERE id = ?;";
     private static final String FIND_ALL_PLANS_QUERY = "SELECT * FROM plan;";
     private static final String FIND_ALL_PLANS_FOR_USER_QUERY = "SELECT * FROM plan WHERE admin_id=?;";
+    private static final String COUNT_ALL_PLANS_FOR_USER_QUERY = "SELECT COUNT(*) FROM plan WHERE admin_id=?;";
     private static final String READ_PLAN_QUERY = "SELECT * FROM plan WHERE id = ?;";
     private static final String UPDATE_PLAN_QUERY = "UPDATE	plan SET name = ? , description = ? WHERE id = ?;";
 
@@ -146,5 +147,19 @@ public class PlanDao {
             e.printStackTrace();
         }
 
+    }
+
+    public int countPlans(int id){
+        try(Connection connection = DbUtil.getConnection();
+        PreparedStatement statement = connection.prepareStatement(COUNT_ALL_PLANS_FOR_USER_QUERY)){
+            statement.setInt(1, id);
+            try(ResultSet resultSet = statement.executeQuery()){
+                resultSet.next();
+                return resultSet.getInt("COUNT(*)");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
     }
 }

@@ -1,6 +1,7 @@
 package pl.coderslab.web;
 
 import pl.coderslab.dao.DayNameDao;
+import pl.coderslab.dao.PlanDao;
 import pl.coderslab.model.DayName;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,7 @@ import java.util.List;
 public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }
