@@ -26,7 +26,7 @@ public class AddRecipesServlet extends HttpServlet {
         int preparation_time = Integer.parseInt(preparationTime);
         String preparation = req.getParameter("preparation");
         String ingredients = req.getParameter("ingredients");
-        String adminId = req.getParameter("admin_id");
+        String adminId = "5";
         int admin_id = Integer.parseInt(adminId);
 
         Recipe newRecipe = new Recipe(name, ingredients, description, preparation_time, preparation,admin_id);
