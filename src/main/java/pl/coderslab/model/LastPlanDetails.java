@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor @AllArgsConstructor @Data
-public class PlanDetails {
+public class LastPlanDetails {
     private String dayName;
     private String mealName;
     private String recipeName;

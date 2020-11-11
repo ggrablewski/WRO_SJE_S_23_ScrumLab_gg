@@ -1,11 +1,14 @@
 package pl.coderslab.dao;
 
 import pl.coderslab.exception.NotFoundException;
+import pl.coderslab.model.LastPlanDetails;
 import pl.coderslab.model.Plan;
-import pl.coderslab.model.PlanDetails;
 import pl.coderslab.utils.DbUtil;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,16 +170,20 @@ public class PlanDao {
         return -1;
     }
 
-    public static PlanDetails getLastPlan(int adminId) {
+    public static List<LastPlanDetails> getLastPlan(int adminId) {
         try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(SELECT_LAST_PLAN_QUERY);
             statement.setInt(1, adminId);
             ResultSet resultSet = statement.executeQuery();
-            PlanDetails lastPlan = new PlanDetails();
-            lastPlan.setDayName(resultSet.getString("day_name"));
-            lastPlan.setMealName(resultSet.getString("meal_name"));
-            lastPlan.setRecipeName(resultSet.getString("recipe_name"));
-            lastPlan.setRecipeDesc(resultSet.getString("recipe_description"));
+            List<LastPlanDetails> lastPlan = new ArrayList<>();
+            LastPlanDetails planDetails = new LastPlanDetails();
+            while (resultSet.next()) {
+                planDetails.setDayName(resultSet.getString("day_name"));
+                planDetails.setMealName(resultSet.getString("meal_name"));
+                planDetails.setRecipeName(resultSet.getString("recipe_name"));
+                planDetails.setRecipeDesc(resultSet.getString("recipe_description"));
+                lastPlan.add(planDetails);
+            }
             return lastPlan;
         } catch (SQLException exception) {
             exception.printStackTrace();
