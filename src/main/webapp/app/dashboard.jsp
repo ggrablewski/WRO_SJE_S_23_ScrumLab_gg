@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,17 +17,7 @@
 </head>
 
 <body>
-<header class="page-header">
-    <nav class="navbar navbar-expand-lg justify-content-between">
-        <a href="/dashboard" class="navbar-brand main-logo main-logo-smaller">
-            Zaplanuj <span>Jedzonko</span>
-        </a>
-        <div class="d-flex justify-content-around">
-            <h4 class="text-light mr-3">Imię</h4>
-            <div class="circle-div text-center"><i class="fas fa-user icon-user"></i></div>
-        </div>
-    </nav>
-</header>
+<jsp:include page="header-dashboard.jsp"/>
 
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
@@ -93,11 +86,11 @@
                 <div class="dashboard-alerts">
                     <div class="alert-item alert-info">
                         <i class="fas icon-circle fa-info-circle"></i>
-                        <span class="font-weight-bold">Liczba przepisów: 1</span>
+                        <span class="font-weight-bold">Liczba przepisów: <c:out value="${recipeCount}"/></span>
                     </div>
                     <div class="alert-item alert-light">
                         <i class="far icon-calendar fa-calendar-alt"></i>
-                        <span class="font-weight-bold">Liczba planów: 1</span>
+                        <span class="font-weight-bold">Liczba planów: <c:out value="${planCount}"/></span>
                     </div>
                 </div>
             </div>

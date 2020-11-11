@@ -1,5 +1,8 @@
 package pl.coderslab.web;
 
+import pl.coderslab.dao.AdminDao;
+import pl.coderslab.dao.PlanDao;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +16,8 @@ public class DashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        System.out.println(session.getAttribute("adminId"));
+        int adminId =(int) session.getAttribute("adminId");
+        req.setAttribute("planCount", PlanDao.countPlans(adminId));
         getServletContext().getRequestDispatcher("/app/dashboard.jsp").forward(req,resp);
     }
 }
