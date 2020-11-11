@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             Boolean ifLogged = true;
             session.setAttribute("logged", ifLogged);
+
             getServletContext().getRequestDispatcher("/app/dashboard.jsp").forward(request, response);
         }else {
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
