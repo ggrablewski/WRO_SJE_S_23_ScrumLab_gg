@@ -36,6 +36,6 @@ public class AddRecipesServlet extends HttpServlet {
         newRecipe = RecipeDao.create(newRecipe);
 
         log.info("Dodano Przepis " + newRecipe);
-        getServletContext().getRequestDispatcher("/add-recipe.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/recipes.jsp").forward(req, resp);
     }
 }
