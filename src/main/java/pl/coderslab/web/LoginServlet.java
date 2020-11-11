@@ -22,12 +22,11 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        AdminDao adminDao = new AdminDao();
-        if(adminDao.verifyLogin(email, password)){
+        if(AdminDao.verifyLogin(email, password)){
             HttpSession session = request.getSession();
             Boolean ifLogged = true;
             session.setAttribute("logged", ifLogged);
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/app/dashboard.jsp").forward(request, response);
         }else {
             getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
         }
