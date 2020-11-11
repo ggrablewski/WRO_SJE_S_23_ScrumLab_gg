@@ -112,7 +112,8 @@ public class PlanDao {
             if (result != 1) {
                 throw new RuntimeException("Execute update returned " + result);
             }
-
+//            TODO pobrać datę utworzenia
+            plan.setCreated(insertStm.getResultSet().getString("created"));
             try (ResultSet generatedKeys = insertStm.getGeneratedKeys()) {
                 if (generatedKeys.first()) {
                     plan.setId(generatedKeys.getInt(1));

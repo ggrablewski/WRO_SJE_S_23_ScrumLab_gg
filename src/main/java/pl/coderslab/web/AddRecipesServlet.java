@@ -18,8 +18,7 @@ public class AddRecipesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        getServletContext().getRequestDispatcher("/add-recipe.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/app/add-recipe.jsp").forward(req, resp);
     }
 
     @Override
@@ -33,10 +32,11 @@ public class AddRecipesServlet extends HttpServlet {
         HttpSession session = req.getSession();
         int admin_id = (int) session.getAttribute("adminId");
 
-        Recipe newRecipe = new Recipe(name, ingredients, description, preparation_time, preparation,admin_id);
+        Recipe newRecipe = new Recipe(name, ingredients, description, preparation_time, preparation, admin_id);
         newRecipe = RecipeDao.create(newRecipe);
 
         log.info("Dodano Przepis " + newRecipe);
-        getServletContext().getRequestDispatcher("/recipes.jsp").forward(req, resp);
+//        getServletContext().getRequestDispatcher("/recipes.jsp").forward(req, resp);
+        resp.sendRedirect("/recipes.jsp");
     }
 }

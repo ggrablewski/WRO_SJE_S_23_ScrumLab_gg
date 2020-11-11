@@ -98,7 +98,7 @@
                             </label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" rows="5" id="planDescription" name="planDescription"
-                                          placeholder="Opis plany"></textarea>
+                                          placeholder="Opis planu"></textarea>
                             </div>
                         </div>
 
