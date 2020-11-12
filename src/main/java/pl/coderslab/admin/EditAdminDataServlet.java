@@ -12,6 +12,12 @@ import java.io.IOException;
 
 @WebServlet("/app/admin/edit-data")
 public class EditAdminDataServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int adminId = (int) request.getSession().getAttribute("adminId");
+        request.setAttribute("oldData", AdminDao.read(adminId));
+        getServletContext().getRequestDispatcher("/app/admin-edit-data.jsp").forward(request, response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int adminId = (int) request.getSession().getAttribute("adminId");
         Admin adminUpdate = AdminDao.read(adminId);
@@ -20,10 +26,6 @@ public class EditAdminDataServlet extends HttpServlet {
         adminUpdate.setEmail(request.getParameter("email"));
         AdminDao.update(adminUpdate);
 
-        getServletContext().getRequestDispatcher("/app/admin-edit-data.jsp").forward(request, response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/app/admin-edit-data.jsp").forward(request, response);
+        response.sendRedirect("/app/dashboard");
     }
 }

@@ -30,14 +30,16 @@
                     <form class="padding-small text-center" action="/app/admin/edit-data" method="post">
                         <h1 class="text-color-darker">Edycja danych</h1>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="nowe imię">
+                            <label for="name">Imię</label>
+                            <input type="text" class="form-control" id="name" name="name" value="${oldData.firstName}">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="surname" name="surname"
-                                   placeholder="nowe nazwisko">
+                            <label for="surname">Nazwisko</label>
+                            <input type="text" class="form-control" id="surname" name="surname" value="${oldData.lastName}">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="nowy email">
+                            <label for="email">e-mail</label>
+                            <input type="text" class="form-control" id="email" name="email" value="${oldData.email}">
                         </div>
                         <button class="btn btn-color rounded-0" type="submit">Zatwierdź zmiany</button>
                     </form>
