@@ -28,19 +28,19 @@
             <div class="dashboard-header m-4">
                 <div class="dashboard-menu">
                     <div class="menu-item border-dashed">
-                        <a href="/recipe-add">
+                        <a href="/app/recipe/add">
                             <i class="far fa-plus-square icon-plus-square"></i>
                             <span class="title">dodaj przepis</span>
                         </a>
                     </div>
                     <div class="menu-item border-dashed">
-                        <a href="/plan-add">
+                        <a href="/app/plan/add">
                             <i class="far fa-plus-square icon-plus-square"></i>
                             <span class="title">dodaj plan</span>
                         </a>
                     </div>
                     <div class="menu-item border-dashed">
-                        <a href="/add-recipe-to-plan">
+                        <a href="/app/recipe/plan/add">
                             <i class="far fa-plus-square icon-plus-square"></i>
                             <span class="title">dodaj przepis do planu</span>
                         </a>
@@ -85,7 +85,7 @@
                             <tr class="d-flex">
                                 <td class="col-2">${meal.mealName}</td>
                                 <td class="col-8">${meal.recipeName}</td>
-                                <td class="col-2"><a href="/recipeDetails?id=${meal.recipeId}" class="btn btn-primary rounded-0">Szczegóły</a></td>
+                                <td class="col-2"><a href="/recipe/details?id=${meal.recipeId}" class="btn btn-primary rounded-0">Szczegóły</a></td>
                             </tr>
                         </c:if>
                         </c:forEach>

@@ -2,7 +2,7 @@
 
 <ul class="nav flex-column long-bg">
     <li class="nav-item">
-        <a class="nav-link" href="/dashboard">
+        <a class="nav-link" href="/app/dashboard">
             <span>Pulpit</span>
             <i class="fas fa-angle-right"></i>
         </a>
@@ -14,7 +14,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/plan-list">
+        <a class="nav-link" href="/app/plan/list">
             <span>Plany</span>
             <i class="fas fa-angle-right"></i>
         </a>

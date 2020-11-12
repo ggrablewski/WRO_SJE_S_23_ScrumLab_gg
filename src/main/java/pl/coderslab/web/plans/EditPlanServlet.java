@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet ("/edit-plan")
+@WebServlet ("/app/plan/edit")
 public class EditPlanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,6 +27,6 @@ public class EditPlanServlet extends HttpServlet {
         plan.setName(planName);
         plan.setDescription(planDescription);
         PlanDao.update(plan);
-        resp.sendRedirect("/dashboard");
+        resp.sendRedirect("/app/dashboard");
     }
 }
