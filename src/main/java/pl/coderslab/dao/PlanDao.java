@@ -38,6 +38,7 @@ public class PlanDao {
                     "recipe_plan.plan_id =  ? " +
                     "ORDER by day_name.display_order, recipe_plan.display_order";
     private static final String READ_PLAN_BY_NAME_QUERY = "SELECT * from plan where name = ?;";
+    private static final String DELETE_RECIPE_PLAN_QUERY = "DELETE FROM recipe_plan WHERE plan_id = ?";
 
 
 
@@ -141,6 +142,17 @@ public class PlanDao {
 
     public static void delete(Integer planId) {
         try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_RECIPE_PLAN_QUERY)) {
+            statement.setInt(1, planId);
+            statement.executeUpdate();
+            boolean deleted = statement.execute();
+            if (!deleted) {
+                throw new NotFoundException("Product not found");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_PLAN_QUERY)) {
             statement.setInt(1, planId);
             statement.executeUpdate();
@@ -151,6 +163,7 @@ public class PlanDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 
