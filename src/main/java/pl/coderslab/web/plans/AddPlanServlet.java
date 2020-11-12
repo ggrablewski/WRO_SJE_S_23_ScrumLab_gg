@@ -1,4 +1,4 @@
-package pl.coderslab.web;
+package pl.coderslab.web.plans;
 
 import pl.coderslab.model.Plan;
 

@@ -1,4 +1,4 @@
-package pl.coderslab.web;
+package pl.coderslab.web.index;
 
 import pl.coderslab.dao.AdminDao;
 

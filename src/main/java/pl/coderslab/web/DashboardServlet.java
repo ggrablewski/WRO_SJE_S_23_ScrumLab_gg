@@ -4,7 +4,7 @@ import pl.coderslab.dao.AdminDao;
 import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
 import pl.coderslab.dao.RecipeDao;
-import pl.coderslab.model.LastPlanDetails;
+import pl.coderslab.model.PlanDetails;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +23,7 @@ public class DashboardServlet extends HttpServlet {
         int adminId =(int) session.getAttribute("adminId");
         req.setAttribute("planCount", PlanDao.countPlans(adminId));
         req.setAttribute("recipeCount", RecipeDao.countRecipes(adminId));
-        List<LastPlanDetails> list = PlanDao.getLastPlan(adminId);
+        List<PlanDetails> list = PlanDao.getLastPlan(adminId);
         req.setAttribute("planName", PlanDao.lastPlanName(adminId));
         req.setAttribute("days", DayNameDao.findAll());
         req.setAttribute("meals", list);

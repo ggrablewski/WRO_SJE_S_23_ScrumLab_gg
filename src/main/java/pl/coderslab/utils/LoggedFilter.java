@@ -1,4 +1,4 @@
-package pl.coderslab.web;
+package pl.coderslab.utils;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

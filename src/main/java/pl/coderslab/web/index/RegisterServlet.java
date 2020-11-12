@@ -1,4 +1,4 @@
-package pl.coderslab.web;
+package pl.coderslab.web.index;
 
 import lombok.extern.slf4j.Slf4j;
 import pl.coderslab.dao.AdminDao;

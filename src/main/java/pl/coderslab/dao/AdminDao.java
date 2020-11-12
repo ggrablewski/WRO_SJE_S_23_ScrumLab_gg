@@ -155,13 +155,10 @@ public class AdminDao {
             statement.setString(1, email);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (!resultSet.next()) {
-                    System.out.println("login");
                     return false;
                 } else {
                     String hashed = resultSet.getString("password");
-                    System.out.println(hashed);
                     if(!BCrypt.checkpw(password, hashed)){
-                        System.out.println("hasło");
                         return false;
                     }
 
