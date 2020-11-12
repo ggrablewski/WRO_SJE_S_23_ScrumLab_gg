@@ -40,6 +40,6 @@ public class AddRecipeToPlanServlet extends HttpServlet {
         int dayId = DayNameDao.readByName(day).getId();
         RecipePlan recipePlan = new RecipePlan(recipeId, mealName, mealNum, dayId, planId);
         RecipePlanDao.addRecipePlan(recipePlan);
-        resp.sendRedirect("/dashboard");
+        resp.sendRedirect("/add-recipe-to-plan");
     }
 }
