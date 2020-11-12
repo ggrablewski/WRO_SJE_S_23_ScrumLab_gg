@@ -11,12 +11,18 @@ import java.io.IOException;
 public class LoggedFilter implements Filter {
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        HttpSession session = ((HttpServletRequest) req).getSession(false);
-        Boolean isLogged = session != null && (Boolean) session.getAttribute("logged");
-        if (isLogged) {
-            chain.doFilter(req, resp);
-        } else {
+        HttpSession session = ((HttpServletRequest) req).getSession();
+        try {
+            Boolean isLogged = session != null && (Boolean) session.getAttribute("logged");
+            if (isLogged) {
+                chain.doFilter(req, resp);
+            } else {
+                ((HttpServletResponse) resp).sendRedirect("/login");
+            }
+        } catch (NullPointerException exception) {
+            exception.printStackTrace();
             ((HttpServletResponse) resp).sendRedirect("/login");
         }
+
     }
 }
