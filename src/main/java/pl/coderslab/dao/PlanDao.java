@@ -3,6 +3,7 @@ package pl.coderslab.dao;
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.PlanDetails;
 import pl.coderslab.model.Plan;
+import pl.coderslab.model.Recipe;
 import pl.coderslab.utils.DbUtil;
 
 import java.sql.Connection;
@@ -36,6 +37,7 @@ public class PlanDao {
                     "JOIN recipe on recipe.id=recipe_id WHERE " +
                     "recipe_plan.plan_id =  ? " +
                     "ORDER by day_name.display_order, recipe_plan.display_order";
+    private static final String READ_PLAN_BY_NAME_QUERY = "SELECT * from plan where name = ?;";
 
 
 
@@ -239,5 +241,25 @@ public class PlanDao {
         return null;
     }
 
+    public static Plan readByName(String planName) {
+        Plan plan = new Plan();
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(READ_PLAN_BY_NAME_QUERY)
+        ) {
+            statement.setString(1, planName);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    plan.setId(resultSet.getInt("id"));
+                    plan.setName(resultSet.getString("name"));
+                    plan.setDescription(resultSet.getString("description"));
+                    plan.setCreated(resultSet.getString("created"));
+                    plan.setAdminId(resultSet.getInt("admin_id"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return plan;
+    }
 
 }
