@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/app/plan/list")
+@WebServlet("/plan-list")
 public class PlansListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -21,6 +21,6 @@ public class PlansListServlet extends HttpServlet {
         int adminId = (int) request.getSession().getAttribute("adminId");
         List<Plan> adminPlans = PlanDao.findAllForAdmin(adminId);
         request.setAttribute("adminPlans", adminPlans);
-        getServletContext().getRequestDispatcher("/app/plans-list.jsp");
+        getServletContext().getRequestDispatcher("/app/plans-list.jsp").forward(request,response);
     }
 }
