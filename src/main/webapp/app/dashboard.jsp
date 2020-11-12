@@ -3,10 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-
-<!DOCTYPE html>
-<html lang="en">
-
+<html lang="pl">
 
 <head>
     <meta charset="utf-8">
@@ -37,7 +34,7 @@
                         </a>
                     </div>
                     <div class="menu-item border-dashed">
-                        <a href="/plan-add">
+                        <a href="/app/plan/add">
                             <i class="far fa-plus-square icon-plus-square"></i>
                             <span class="title">dodaj plan</span>
                         </a>
