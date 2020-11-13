@@ -26,7 +26,7 @@
 <section class="dashboard-section">
     <div class="container pt-4 pb-4">
         <div class="border-dashed view-height">
-            <div class="container">
+            <div class="container w-75">
                 <h4>O mnie</h4><br/>
                 <p>Jestem autorką książki kucharskiej "Zaplanuj Jedzonko", która stała się bestsellerem na rynku książek kucharskich w Polsce :)</p><br/>
                 <h4>O książce</h4><br/>
