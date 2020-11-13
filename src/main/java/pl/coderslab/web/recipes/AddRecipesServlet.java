@@ -36,7 +36,7 @@ public class AddRecipesServlet extends HttpServlet {
         Recipe newRecipe = new Recipe(name, ingredients, description, preparation_time, preparation,admin_id);
         newRecipe = RecipeDao.create(newRecipe);
 
-        log.info("Dodano Przepis " + newRecipe);
+        log.info("Dodano Przepis " + newRecipe.toString(1));
         resp.sendRedirect("/app/recipes");
     }
 }

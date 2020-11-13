@@ -15,7 +15,7 @@ public class RecipeDetails extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = getParameterAsInt(req, "id", 0);
+        int id = getParameterAsInt(req, "id", 1);
         Recipe recipe = RecipeDao.read(id);
         req.setAttribute("recipe", recipe);
         getServletContext().getRequestDispatcher("/recipeDetails.jsp").forward(req, resp);

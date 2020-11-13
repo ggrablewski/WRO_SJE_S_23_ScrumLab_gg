@@ -36,3 +36,18 @@ INSERT INTO `recipe_plan` (`id`, `recipe_id`,  `meal_name`, `display_order`, `da
 (null, 2,  'Śniadanie', 1, 1, 6),
 (null, 1,  'Kolacja', 2, 1, 6),
 (null, 3,  'Śniadanie', 1, 2, 6);
+
+CREATE TABLE IF NOT EXISTS admin_picked(
+                                           `id` INT NOT NULL AUTO_INCREMENT,
+                                           `recipe_id` INT NOT NULL,
+                                           `admin_id` INT NOT NULL COMMENT 'Klucz obcy tabeli plany.',
+                                           PRIMARY KEY (`id`),
+                                           FOREIGN KEY (`recipe_id`)
+                                               REFERENCES `scrumlab`.`recipe` (`id`)
+                                               ON DELETE NO ACTION
+                                               ON UPDATE NO ACTION,
+                                           FOREIGN KEY (`admin_id`)
+                                               REFERENCES `scrumlab`.`admins` (`id`)
+                                               ON DELETE NO ACTION
+                                               ON UPDATE NO ACTION
+);
