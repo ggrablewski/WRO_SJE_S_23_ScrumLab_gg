@@ -26,49 +26,47 @@
 <section class="dashboard-section">
     <div class="row dashboard-nowrap">
         <jsp:include page="side-bar.jsp"/>
-
-        <div class="container pt-4 pb-4">
-            <div class="border-dashed view-height">
-                <div class="container">
-
-                    <section>
-                        <div class="row padding-small">
-                            <i class="fas fa-users icon-users"></i>
-                            <h1>Przepisy naszych użytkowników:</h1>
-                            <hr>
-                            <div class="orange-line w-100"></div>
-                        </div>
-                    </section>
-
-                    <section class="mr-4 ml-4">
-                        <table class="table">
-                            <thead>
-                            <tr class="d-flex text-color-darker">
-                                <th scope="col" class="col-1">ID</th>
-                                <th scope="col" class="col-3">NAZWA</th>
-                                <th scope="col" class="col-7">OPIS</th>
-                                <th scope="col" class="col-1">AKCJE</th>
-                            </tr>
-                            </thead>
-                            <tbody class="text-color-lighter">
-                            <c:forEach items="${recipeList}" var="recipe">
-                            <tr class="d-flex">
-                                <th scope="row" class="col-1">${recipe.id}</th>
-                                <td class="col-3">${recipe.name}</td>
-                                <td class="col-7">${recipe.description}</td>
-                                <td class="col-1"><a href="/app/recipe/details?id=${recipe.id}"
-                                                     class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
-                            </tr>
+        <div class="m-4 p-3 width-medium">
+            <div class="dashboard-content border-dashed p-3 m-4 view-height">
+                <div class="row  p-1 m-1">
+                    <div class="row padding-small">
+                        <i class="fas fa-users icon-users"></i>
+                        <h1>Twoje przepisy:</h1>
+                    </div>
+                    <div class="orange-line w-100"></div>
+                </div>
+                <div class="schedules-content">
+                    <table class="table border-bottom">
+                        <thead>
+                        <tr class="d-flex">
+                            <th class="col-1">ID</th>
+                            <th class="col-2">NAZWA</th>
+                            <th class="col-7">OPIS</th>
+                            <th class="col-2 center">AKCJE</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-color-lighter">
+                        <c:forEach items="${recipeList}" var="recipe" varStatus="index">
+                        <tr class="d-flex">
+                            <td class="col-1">${index.count}</td>
+                            <td class="col-2">${recipe.name}</td>
+                            <td class="col-7">${recipe.description}</td>
+                            <td class="col-2 d-flex align-items-center justify-content-center flex-wrap">
+                                <a href="/app/recipe/delete?id=${recipe.id}" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+                                <a href="/app/recipe/details?id=${recipe.id}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
+                                <a href="/app/recipe/edit?id=${recipe.id}" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
+                            </td>
                             </c:forEach>
-
-                        </table>
-                    </section>
-
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
