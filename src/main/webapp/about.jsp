@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: grzegorz
@@ -27,14 +29,19 @@
     <div class="container pt-4 pb-4">
         <div class="border-dashed view-height">
             <div class="container w-75">
-                <h4>O mnie</h4><br/>
-                <p>Jestem autorką książki kucharskiej "Zaplanuj Jedzonko", która stała się bestsellerem na rynku książek kucharskich w Polsce :)</p><br/>
-                <h4>O książce</h4><br/>
-                <p>Moja książka promuje zdrowe odżywianie i podkreśla jak ważną rolę odgrywa w nim planowanie posiłków</p><br/>
-                <h4>O warsztatach</h4><br/>
-                <p>Przeprowadzam w całym kraju warsztaty, na których uczę planowania posiłków.</p><br/>
-                <h4>O aplikacji</h4><br/>
-                <p>Ta plikacja ma pomóc w planowaniu codziennych posiłków, w tym również zaprezentować proste przepisy na smaczne i zdrowe dania</p><br/>
+                <c:forEach items="${about}" var="item">
+                    <h4>${item.title}</h4>
+                    <p>${item.contents}</p><br/>
+                </c:forEach>
+
+<%--                <h4>O mnie</h4>--%>
+<%--                <p>Jestem autorką książki kucharskiej "Zaplanuj Jedzonko", która stała się bestsellerem na rynku książek kucharskich w Polsce :)</p><br/>--%>
+<%--                <h4>O książce</h4>--%>
+<%--                <p>Moja książka promuje zdrowe odżywianie i podkreśla jak ważną rolę odgrywa w nim planowanie posiłków</p><br/>--%>
+<%--                <h4>O warsztatach</h4>--%>
+<%--                <p>Przeprowadzam w całym kraju warsztaty, na których uczę planowania posiłków</p><br/>--%>
+<%--                <h4>O aplikacji</h4>--%>
+<%--                <p>Ta aplikacja ma pomóc w planowaniu codziennych posiłków, w tym również zaprezentować proste przepisy na smaczne i zdrowe dania</p><br/>--%>
             </div>
         </div>
     </div>

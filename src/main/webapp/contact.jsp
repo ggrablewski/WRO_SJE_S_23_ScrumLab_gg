@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: grzegorz
@@ -27,10 +29,19 @@
     <div class="container pt-4 pb-4">
         <div class="border-dashed view-height">
             <div class="container w-25">
-                <p> Maria Iksińska ZaplanujJedzonko.pl</p><br/>
-                <p> Adres e-mail: <a href="mailto:maria.iksinska@zaplanujjedzonko.pl">maria.iksinska@zaplanujjedzonko.pl</a></p><br/>
-                <p> Telefon do biura:<br/>+22 123 45 67</p><br/>
-                <p> facebook: <a href="https://www.facebook.com/maria.iksinska">www.facebook.com/maria.iksinska</a></p><br/>
+                <c:forEach items="${contact}" var="item">
+                    <p>${item.title}<br/>
+                    <a href=${item.href}>${item.contents}</a></p><br/>
+                </c:forEach>
+
+<%--                <p>Maria Iksińska<br/>--%>
+<%--                <a href="ZaplanujJedzonko.pl">ZaplanujJedzonko.pl</a></p><br/>--%>
+<%--                <p>Adres e-mail:<br/>--%>
+<%--                <a href="mailto:maria.iksinska@zaplanujjedzonko.pl">maria.iksinska@zaplanujjedzonko.pl</a></p><br/>--%>
+<%--                <p>Telefon do biura:<br/>--%>
+<%--                <a href="tel:+221234567">+22 123 45 67</a></p><br/>--%>
+<%--                <p>facebook:<br/>--%>
+<%--                <a href="https://www.facebook.com/maria.iksinska">www.facebook.com/maria.iksinska</a></p><br/>--%>
             </div>
         </div>
     </div>

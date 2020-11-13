@@ -130,3 +130,33 @@ CREATE TABLE `book` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 COMMENT = 'Przykładowa tabela.';
+
+
+-- -----------------------------------------------------
+-- Tables `scrumlab` - ADDITIONAL TABLES
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS admin_picked(
+                                           `id` INT NOT NULL AUTO_INCREMENT,
+                                           `recipe_id` INT NOT NULL,
+                                           `admin_id` INT NOT NULL COMMENT 'Klucz obcy tabeli plany.',
+                                           PRIMARY KEY (`id`),
+                                           FOREIGN KEY (`recipe_id`)
+                                               REFERENCES `scrumlab`.`recipe` (`id`)
+                                               ON DELETE NO ACTION
+                                               ON UPDATE NO ACTION,
+                                           FOREIGN KEY (`admin_id`)
+                                               REFERENCES `scrumlab`.`admins` (`id`)
+                                               ON DELETE NO ACTION
+                                               ON UPDATE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS about (
+    `title` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+    `contents` varchar(255) COLLATE utf8_polish_ci NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS contact (
+    `title` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+    `href` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+    `contents` varchar(255) COLLATE utf8_polish_ci NOT NULL
+);
