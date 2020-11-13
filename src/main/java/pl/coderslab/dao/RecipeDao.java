@@ -1,8 +1,11 @@
 package pl.coderslab.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.coderslab.exception.NotFoundException;
 import pl.coderslab.model.Recipe;
 import pl.coderslab.utils.DbUtil;
+import pl.coderslab.web.recipes.EditRecipe;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,8 +24,8 @@ private static final String FIND_ALL_RECIPES_FOR_USER_QUERY = "SELECT * FROM rec
 private static final String COUNT_ALL_RECIPES_FOR_USER_QUERY = "SELECT COUNT(*) FROM recipe WHERE admin_id=?;";
 private static final String READ_RECIPE_QUERY = "SELECT * from recipe where id = ?;";
 private static final String READ_RECIPE_BY_NAME_QUERY = "SELECT * from recipe where name = ?;";
-private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ? ingredients = ? description = ? " +
-        "updated = NOW() preparation_time = ? preparation = ? admin_id = ? WHERE id = ?;";
+private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ?, ingredients = ?, description = ?, " +
+        "updated = NOW(), preparation_time = ?, preparation = ?, admin_id = ? WHERE id = ?;";
 
     public static Recipe read(Integer recipeId) {
         Recipe recipe = new Recipe();
@@ -120,6 +123,8 @@ private static final String UPDATE_RECIPE_QUERY = "UPDATE recipe SET name = ? in
             e.printStackTrace();
         }
     }
+
+    private static final Logger log = LoggerFactory.getLogger(EditRecipe.class);
 
     public static void update(Recipe recipe) {
         try (Connection connection = DbUtil.getConnection();
