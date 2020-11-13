@@ -16,7 +16,7 @@
           crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Charmonman:400,700|Open+Sans:400,600,700&amp;subset=latin-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./../../css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 
@@ -34,7 +34,7 @@
                         <h3 class="color-header text-uppercase">SZCZEGÓŁY PLANU</h3>
                     </div>
                     <div class="col d-flex justify-content-end mb-2 noPadding">
-                        <a href="/dashboard" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Powrót</a>
+                        <a href="/app/dashboard" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Powrót</a>
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@
                                         <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
                                     </td>
                                     <td class="col-2 center">
-                                        <a href="/recipeDetails?id=${meal.recipeId}" class="btn btn-primary rounded-0">Szczegóły</a>
+                                        <a href="/recipe/details?id=${meal.recipeId}" class="btn btn-primary rounded-0">Szczegóły</a>
                                     </td>
                                 </tr>
                                 </c:if></c:forEach>

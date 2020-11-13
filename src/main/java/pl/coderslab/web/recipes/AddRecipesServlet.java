@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Slf4j
-@WebServlet("/recipe-add")
+@WebServlet("/app/recipe/add")
 public class AddRecipesServlet extends HttpServlet {
 
     @Override
@@ -37,6 +37,6 @@ public class AddRecipesServlet extends HttpServlet {
         newRecipe = RecipeDao.create(newRecipe);
 
         log.info("Dodano Przepis " + newRecipe);
-        getServletContext().getRequestDispatcher("/recipes.jsp").forward(req, resp);
+        resp.sendRedirect("/app/recipes");
     }
 }

@@ -99,7 +99,7 @@
                             <th scope="row" class="col-1">${recipe.id}</th>
                             <td class="col-3">${recipe.name}</td>
                             <td class="col-7">${recipe.description}</td>
-                            <td class="col-1"><a href="/recipeDetails?id=${recipe.id}"
+                            <td class="col-1"><a href="/recipe/details?id=${recipe.id}"
                                                  class="btn btn-info rounded-0 text-light">Szczegóły</a></td>
                         </tr>
                         </c:forEach>

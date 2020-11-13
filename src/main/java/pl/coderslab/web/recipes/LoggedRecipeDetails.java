@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/recipe/details")
-public class RecipeDetails extends HttpServlet {
-
+@WebServlet ("/app/recipe/details")
+public class LoggedRecipeDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = getParameterAsInt(req, "id", 0);
         Recipe recipe = RecipeDao.read(id);
         req.setAttribute("recipe", recipe);
-        getServletContext().getRequestDispatcher("/recipeDetails.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/app/recipeDetails.jsp").forward(req, resp);
     }
 
     public int getParameterAsInt(HttpServletRequest req, String paramName, int dftValue) {

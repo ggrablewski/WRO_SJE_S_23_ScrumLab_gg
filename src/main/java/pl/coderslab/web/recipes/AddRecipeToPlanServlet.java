@@ -1,4 +1,4 @@
-package pl.coderslab.web.plans;
+package pl.coderslab.web.recipes;
 
 import pl.coderslab.dao.DayNameDao;
 import pl.coderslab.dao.PlanDao;
@@ -16,7 +16,7 @@ import java.io.IOException;
 
 
 
-@WebServlet ("/add-recipe-to-plan")
+@WebServlet ("/app/recipe/plan/add")
 public class AddRecipeToPlanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,6 +40,6 @@ public class AddRecipeToPlanServlet extends HttpServlet {
         int dayId = DayNameDao.readByName(day).getId();
         RecipePlan recipePlan = new RecipePlan(recipeId, mealName, mealNum, dayId, planId);
         RecipePlanDao.addRecipePlan(recipePlan);
-        resp.sendRedirect("/add-recipe-to-plan");
+        resp.sendRedirect("/app/recipe/plan/add");
     }
 }

@@ -2,13 +2,13 @@
 
 <ul class="nav flex-column long-bg">
     <li class="nav-item">
-        <a class="nav-link" href="/dashboard">
+        <a class="nav-link" href="/app/dashboard">
             <span>Pulpit</span>
             <i class="fas fa-angle-right"></i>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/recipes">
+        <a class="nav-link" href="/app/recipes">
             <span>Przepisy</span>
             <i class="fas fa-angle-right"></i>
         </a>
@@ -20,7 +20,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/app-edit-user-data.html">
+        <a class="nav-link" href="/app/admin/edit-data">
             <span>Edytuj dane</span>
             <i class="fas fa-angle-right"></i>
         </a>

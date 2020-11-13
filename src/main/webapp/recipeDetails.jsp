@@ -17,7 +17,7 @@
           crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Charmonman:400,700|Open+Sans:400,600,700&amp;subset=latin-ext"
           rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./../css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
@@ -77,61 +77,6 @@
                         </div>
                     </div>
                 </section>
-
-            <%--                <section>--%>
-<%--                    <div class="row padding-small">--%>
-<%--                        <i class="fas fa-users icon-users"></i>--%>
-<%--                        <h1>Przepisy naszych użytkowników:</h1>--%>
-<%--                        <hr>--%>
-<%--                        <div class="orange-line w-100"></div>--%>
-<%--                    </div>--%>
-<%--                </section>--%>
-
-<%--                <section class="mr-4 ml-4">--%>
-<%--                    <table class="table">--%>
-
-<%--                    <tbody class="text-color-lighter">--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th scope="row" class="col-3">Numer przepisu</th>--%>
-<%--                        <td class="col-15">${recipe.id}</td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th scope="row" class="col-3">Nazwa przepisu</th>--%>
-<%--                        <td class="col-15">${recipe.name}</td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th scope="row" class="col-3">Opis</th>--%>
-<%--                        <td class="col-15">${recipe.description}</td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th scope="row" class="col-3">Data utworzenia</th>--%>
-<%--                        <td class="col-15">${recipe.created}</td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th scope="row" class="col-3">Data ostatniej modyfikacji</th>--%>
-<%--                        <td class="col-15">${recipe.updated}</td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th scope="row" class="col-3">Składniki</th>--%>
-<%--                        <td class="col-15">${recipe.ingredients}</td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th scope="row" class="col-3">Opis przygotowania</th>--%>
-<%--                        <td class="col-15">${recipe.preparation}</td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th scope="row" class="col-3">Czas przygotowania <br/>(w minutach)</th>--%>
-<%--                        <td class="col-15">${recipe.preparation_time}</td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="d-flex">--%>
-<%--                        <th scope="row" class="col-3">Numer użytkownika</th>--%>
-<%--                        <td class="col-15">${recipe.admin_id}</td>--%>
-<%--                    </tr>--%>
-<%--                    <tr class="col-1"><a href="/recipes" class="btn btn-info rounded-0 text-light">Powrót do--%>
-<%--                        listy</a></tr>--%>
-
-<%--                    </table>--%>
-<%--                </section>--%>
 
             </div>
         </div>

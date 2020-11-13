@@ -53,7 +53,7 @@ public class AdminDao {
 
     }
 
-    public  static List<Admin> findAll() {
+    public static List<Admin> findAll() {
         List<Admin> adminList = new ArrayList<>();
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_ALL_ADMIN_QUERY);
@@ -77,7 +77,7 @@ public class AdminDao {
 
     }
 
-    public static  Admin create(Admin admin) {
+    public static Admin create(Admin admin) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement insertStm = connection.prepareStatement(CREATE_ADMIN_QUERY,
                      PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -106,7 +106,7 @@ public class AdminDao {
         return null;
     }
 
-    public static  void delete(Integer adminId) {
+    public static void delete(Integer adminId) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_ADMIN_QUERY)) {
             statement.setInt(1, adminId);
@@ -121,7 +121,7 @@ public class AdminDao {
         }
     }
 
-    public  static void update(Admin admin) {
+    public static void update(Admin admin) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ADMIN_QUERY)) {
             statement.setInt(5, admin.getId());
@@ -136,7 +136,7 @@ public class AdminDao {
 
     }
 
-    public static  void changeIfSuperadmin(Integer adminId, Integer ifSuperadmin) {
+    public static void changeIfSuperadmin(Integer adminId, Integer ifSuperadmin) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(CHANGE_SUPER_ADMIN_QUERY)) {
             statement.setInt(2, adminId);
@@ -148,7 +148,7 @@ public class AdminDao {
     }
 
 
-    public  static boolean verifyLogin(String email, String password) {
+    public static boolean verifyLogin(String email, String password) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(VERIFY_EMAIL_QUERY)
         ) {
@@ -158,7 +158,7 @@ public class AdminDao {
                     return false;
                 } else {
                     String hashed = resultSet.getString("password");
-                    if(!BCrypt.checkpw(password, hashed)){
+                    if (!BCrypt.checkpw(password, hashed)) {
                         return false;
                     }
 
@@ -171,7 +171,7 @@ public class AdminDao {
     }
 
 
-    public  static boolean verifySuperAdmin(int id) {
+    public static boolean verifySuperAdmin(int id) {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(VERIFY_SUPERADMIN_QUERY)
         ) {
