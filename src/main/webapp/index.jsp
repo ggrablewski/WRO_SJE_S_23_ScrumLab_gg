@@ -28,38 +28,35 @@
             <div class="carousel-item active">
                 <div class="container w-75 d-flex">
                     <div class="carousel-caption d-block">
-                        <h1>Lorem ipsum dolor sit amet</h1>
-                        <h3> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.</h3>
+                        <h1>Twoje ulubione przepisy</h1>
+                        <h3>Dodawaj i przeglądaj swoje ulubione przepisy</h3>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="container w-75 d-flex">
                     <div class="carousel-caption d-block">
-                        <h1>Torem ipsum dolor sit amet</h1>
-                        <h3> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.</h3>
+                        <h1>Twoje indywidualne plany żywieniowe</h1>
+                        <h3>Konsultuj plany żywieniowe dopasowane do Twoich potrzeb</h3>
                     </div>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="container w-75 d-flex">
                     <div class="carousel-caption d-block">
-                        <h1>Borem ipsum dolor sit amet</h1>
-                        <h3> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua.</h3>
+                        <h1>Pełna informacja w Twoim planie</h1>
+                        <h3>Dodawaj przepisy do Twojego planu żywieniowego</h3>
                     </div>
                 </div>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">Wcześniej</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
+            <span class="sr-only">Dalej</span>
         </a>
     </div>
 </section>
@@ -67,13 +64,12 @@
 <section class="section-more padding-small">
     <div class="container d-flex justify-content-between">
         <div class="mr-4">
-            <h1 class="pb-3">Lorem ipsum dolor sit amet</h1>
-            <h4 class="pt-1">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua.</h4>
+            <h1 class="pb-3">Twoje ulubione przepisy</h1>
+            <h4 class="pt-1">Dodawaj i przeglądaj swoje ulubione przepisy</h4>
         </div>
         <div class="ml-4 align-self-center">
             <button class="btn btn-color rounded-0 mt-4 pl-4 pr-4">
-                <a href="index.html">Lorem ipsum</a>
+                <a href="/">Strona główna</a>
             </button>
         </div>
     </div>
@@ -84,20 +80,20 @@
         <div class="row">
             <div class="col text-center">
                 <i class="fas fa-check icon-details"></i>
-                <h1>Lorem ipsum dolor sit amet</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+                <h1>Twoje ulubione przepisy</h1>
+                <p>Dodawaj i przeglądaj swoje ulubione przepisy
                 </p>
             </div>
             <div class="col text-center pr-4 pl-4 mr-4 ml-4">
                 <i class="far fa-clock icon-details"></i>
-                <h1>Lorem ipsum dolor sit amet</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+                <h1>Twoje indywidualne plany żywieniowe</h1>
+                <p>Konsultuj plany żywieniowe dopasowane do Twoich potrzeb
                 </p>
             </div>
             <div class="col text-center">
                 <i class="fas fa-list icon-details"></i>
-                <h1>Lorem ipsum dolor sit amet</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+                <h1>Pełna informacja w Twoim planie</h1>
+                <p>Dodawaj przepisy do Twojego planu żywieniowego
                 </p>
             </div>
         </div>
@@ -109,7 +105,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Lorem ipsum dolor sie amet</h1>
+                <h2>Podziel się z nami swoimi uwagami</h2>
             </div>
             <div class="col-5">
                 <div class="input-group mb-3">
@@ -117,7 +113,7 @@
                            aria-label="Recipient's username" aria-describedby="basic-addon3">
                     <div class="input-group-append">
                         <button class="input-group-text btn-color border-0 rounded-0" type="submit" id="basic-addon3">
-                            <a href="index.html">Lorem</a>
+                            <a href="/">Wyślij</a>
                         </button>
                     </div>
                 </div>
@@ -131,15 +127,13 @@
         <div class="row">
             <div class="col-4 mr-4">
                 <div class="div-img">
+<%--                    <img src="./../resources/html/images/image.png">--%>
                 </div>
             </div>
 
             <div class="col-7 ml-4">
-                <h1 class="pb-1">Lorem ipsum dolor sit amet</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat
-                    volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed. Lorem ipsum dolor sit
-                    amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat. Donec
-                    placerat nisl magna, et faucibus arcu condimentum sed.
+                <h1 class="pb-1">Twoje ulubione przepisy</h1>
+                <p>Dodawaj i przeglądaj swoje ulubione przepisy
                 </p>
             </div>
         </div>
@@ -150,26 +144,26 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3 class="mb-4">Lorem ipsum dolor</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna.</p>
+                <h3 class="mb-4">Twoje ulubione przepisy</h3>
+                <p>Dodawaj i przeglądaj swoje ulubione przepisy</p>
             </div>
             <div class="col pl-4 ml-4">
-                <h3 class="mb-4">Lorem ipsum dolor</h3>
+                <h3 class="mb-4">Zaplanuj jedzonko</h3>
                 <ul class="container">
-                    <li>consectetur adipiscing elit</li>
-                    <li>sed do eiusmod tempor</li>
-                    <li>incididunt ut labore</li>
-                    <li>et dolore magna aliqua</li>
+                    <li>Zbieraj przepisy</li>
+                    <li>Twórz plany żywieniowe</li>
+                    <li>Dodawaj przepisy do planu</li>
+                    <li>Odżywiaj się zdrowo!</li>
                 </ul>
             </div>
             <div class="col">
-                <h3 class="mb-4">Lorem ipsum dolor</h3>
+                <h3 class="mb-4">Zaplanuj jedzonko</h3>
                 <div class="input-group mb-3">
                     <input type="text" class="form-control border-0 rounded-0" placeholder=""
                            aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="input-group-text btn-color border-0 rounded-0" type="submit" id="basic-addon2"><a
-                                href="index.html">Lorem</a></button>
+                                href="/">Wyślij</a></button>
                     </div>
                 </div>
                 <div class="container d-flex-row">
