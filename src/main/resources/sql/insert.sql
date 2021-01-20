@@ -36,3 +36,15 @@ INSERT INTO `recipe_plan` (`id`, `recipe_id`,  `meal_name`, `display_order`, `da
 (null, 2,  'Śniadanie', 1, 1, 6),
 (null, 1,  'Kolacja', 2, 1, 6),
 (null, 3,  'Śniadanie', 1, 2, 6);
+
+INSERT INTO about (title, contents) VALUES
+('O mnie', 'Jestem autorką książki kucharskiej "Zaplanuj Jedzonko", która stała się bestsellerem na rynku książek kucharskich w Polsce :)'),
+('O książce', 'Moja książka promuje zdrowe odżywianie i podkreśla jak ważną rolę odgrywa w nim planowanie posiłków'),
+('O warsztatach', 'Przeprowadzam w całym kraju warsztaty, na których uczę planowania posiłków'),
+('O aplikacji', 'Ta aplikacja ma pomóc w planowaniu codziennych posiłków, w tym również zaprezentować proste przepisy na smaczne i zdrowe dania');
+
+INSERT INTO contact (title, href, contents) VALUES
+('Maria Iksińska', 'ZaplanujJedzonko.pl', 'ZaplanujJedzonko.pl'),
+('Adres e-mail:', 'mailto:maria.iksinska@zaplanujjedzonko.pl', 'maria.iksinska@zaplanujjedzonko.pl'),
+('Telefon do biura:', 'tel:+221234567', '+22 123 45 67'),
+('facebook:', 'https://www.facebook.com/maria.iksinska', 'www.facebook.com/maria.iksinska');
